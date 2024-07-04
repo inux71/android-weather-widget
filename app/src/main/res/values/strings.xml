@@ -2,4 +2,6 @@
     <string name="app_name">Weather Widget</string>
     <string name="search_content_description">Search city</string>
     <string name="arrow_back_content_description">Go back</string>
+    <string name="clear_content_description">Clear</string>
+    <string name="flag_content_description">Country flag</string>
 </resources>
