@@ -4,4 +4,7 @@
     <string name="arrow_back_content_description">Go back</string>
     <string name="clear_content_description">Clear</string>
     <string name="flag_content_description">Country flag</string>
+    <string name="settings_content_description">Settings</string>
+    <string name="dark_mode_content_description">Dark mode</string>
+    <string name="light_mode_content_description">Light mode</string>
 </resources>

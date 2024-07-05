@@ -3,9 +3,11 @@ package com.grabieckacper.weatherwidget.ui.view
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,13 +23,24 @@ import com.grabieckacper.weatherwidget.viewmodel.WeatherViewModel
 @Composable
 fun WeatherView(
     viewModel: WeatherViewModel = hiltViewModel(),
-    onNavigateToSelectCityView: () -> Unit
+    onNavigateToSelectCityView: () -> Unit,
+    onNavigateToSettingsView: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(text = viewModel.state.value.name)
-            })
+            TopAppBar(
+                title = {
+                    Text(text = viewModel.state.value.name)
+                },
+                actions = {
+                    IconButton(onClick = onNavigateToSettingsView) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = stringResource(id = R.string.settings_content_description)
+                        )
+                    }
+                }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = onNavigateToSelectCityView) {
@@ -48,7 +61,8 @@ fun WeatherView(
 @Composable
 @Preview(showBackground = true)
 fun WeatherViewPreview() {
-    WeatherView {
-
-    }
+    WeatherView(
+        onNavigateToSelectCityView = {},
+        onNavigateToSettingsView = {}
+    )
 }

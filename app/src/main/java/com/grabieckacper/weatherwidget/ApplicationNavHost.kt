@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.grabieckacper.weatherwidget.ui.view.SelectCityView
+import com.grabieckacper.weatherwidget.ui.view.SettingsView
 import com.grabieckacper.weatherwidget.ui.view.WeatherView
 
 @Composable
@@ -17,13 +18,27 @@ fun ApplicationNavHost(
         startDestination = startDestination
     ) {
         composable(route = "weather-view") {
-            WeatherView(onNavigateToSelectCityView = {
-                navHostController.navigate(route = "select-city-view")
-            })
+            WeatherView(
+                onNavigateToSelectCityView = {
+                    navHostController.navigate(route = "select-city-view")
+                },
+                onNavigateToSettingsView = {
+                    navHostController.navigate(route = "settings-view")
+                }
+            )
         }
 
         composable(route = "select-city-view") {
             SelectCityView(onNavigateBackToWeatherView = {
+                navHostController.popBackStack(
+                    route = "weather-view",
+                    inclusive = false
+                )
+            })
+        }
+
+        composable(route = "settings-view") {
+            SettingsView(onNavigateBackToWeatherView = {
                 navHostController.popBackStack(
                     route = "weather-view",
                     inclusive = false
