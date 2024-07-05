@@ -4,18 +4,26 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.preferences.core.doublePreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.grabieckacper.weatherwidget.model.City
 import com.grabieckacper.weatherwidget.model.GeocodingResponse
+import com.grabieckacper.weatherwidget.repository.DataStoreRepository
 import com.grabieckacper.weatherwidget.service.GeocodingService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class SelectCityViewModel @Inject constructor(private val service: GeocodingService) : ViewModel() {
+class SelectCityViewModel @Inject constructor(
+    private val geocodingService: GeocodingService,
+    private val dataStoreRepository: DataStoreRepository
+) : ViewModel() {
     data class SelectCityViewModelState(
         val query: String = "",
         val active: Boolean = false,
@@ -36,7 +44,7 @@ class SelectCityViewModel @Inject constructor(private val service: GeocodingServ
     }
 
     fun searchCities() {
-        service.getCities(_state.value.query)
+        geocodingService.getCities(_state.value.query)
             .enqueue(object : Callback<GeocodingResponse> {
                 override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
                     if (response.isSuccessful) {
@@ -61,5 +69,24 @@ class SelectCityViewModel @Inject constructor(private val service: GeocodingServ
 
     fun clearCities() {
         _state.value = _state.value.copy(cities = emptyList())
+    }
+
+    fun saveToDataStore(city: City) {
+        viewModelScope.launch {
+            dataStoreRepository.write(
+                key = stringPreferencesKey("name"),
+                value = city.name
+            )
+
+            dataStoreRepository.write(
+                key = doublePreferencesKey("latitude"),
+                value = city.latitude
+            )
+
+            dataStoreRepository.write(
+                key = doublePreferencesKey("longitude"),
+                value = city.longitude
+            )
+        }
     }
 }

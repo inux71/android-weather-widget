@@ -108,7 +108,8 @@ fun SelectCityView(
                             country = city.country,
                             countryCode = city.countryCode
                         ) {
-                            // onClick
+                            viewModel.saveToDataStore(city = city)
+                            onNavigateBackToWeatherView()
                         }
                     }
                 }

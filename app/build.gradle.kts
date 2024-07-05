@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.coil.kt.svg)
     implementation(libs.squareup.retrofit2.retrofit)
     implementation(libs.squareup.retrofit2.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
 }
 
 kapt {

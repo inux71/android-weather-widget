@@ -12,15 +12,21 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabieckacper.weatherwidget.R
+import com.grabieckacper.weatherwidget.viewmodel.WeatherViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherView(onNavigateToSelectCityView: () -> Unit) {
+fun WeatherView(
+    viewModel: WeatherViewModel = hiltViewModel(),
+    onNavigateToSelectCityView: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(title = {
-                Text(text = "Gliwice")
+                Text(text = viewModel.state.value.name)
             })
         },
         floatingActionButton = {
@@ -36,5 +42,13 @@ fun WeatherView(onNavigateToSelectCityView: () -> Unit) {
             text = "Weather View",
             modifier = Modifier.padding(innerPadding)
         )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun WeatherViewPreview() {
+    WeatherView {
+
     }
 }
