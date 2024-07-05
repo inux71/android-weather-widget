@@ -16,17 +16,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.grabieckacper.weatherwidget.R
-import com.grabieckacper.weatherwidget.model.City
 
 @Composable
 fun CityLabel(
-    city: City,
+    name: String,
+    country: String,
+    countryCode: String,
     onClick: () -> Unit
 ) {
     Row(
@@ -42,7 +44,7 @@ fun CityLabel(
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("https://hatscripts.github.io/circle-flags/flags/${city.countryCode.lowercase()}.svg")
+                .data("https://hatscripts.github.io/circle-flags/flags/${countryCode.lowercase()}.svg")
                 .decoderFactory(SvgDecoder.Factory())
                 .build(),
             contentDescription = stringResource(id = R.string.flag_content_description),
@@ -56,11 +58,17 @@ fun CityLabel(
                 )
         )
 
-        Text(text = city.name)
+        Text(
+            text = name,
+            modifier = Modifier.fillMaxWidth(0.3f),
+            textAlign = TextAlign.Center
+        )
 
-        Text(text = city.country)
-
-        Text(text = city.admin1)
+        Text(
+            text = country,
+            modifier = Modifier.fillMaxWidth(0.6f),
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -68,12 +76,9 @@ fun CityLabel(
 @Preview(showBackground = true)
 fun CityLabelPreview() {
     CityLabel(
-        city = City(
-            name = "Berlin",
-            countryCode = "DE",
-            country = "Deutschland",
-            admin1 = "Berlin"
-        ),
+        name = "Berlin",
+        countryCode = "DE",
+        country = "Deutschland",
         onClick = {}
     )
 }

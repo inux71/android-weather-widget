@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.coil.kt.compose)
     implementation(libs.coil.kt.svg)
+    implementation(libs.squareup.retrofit2.retrofit)
+    implementation(libs.squareup.retrofit2.converter.gson)
 }
 
 kapt {

@@ -12,6 +12,7 @@ hilt = "2.51.1"
 navigation = "2.7.7"
 hiltNavigationCompose = "1.2.0"
 coilCompose = "2.6.0"
+retrofit = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +35,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coilCompose" }
+squareup-retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+squareup-retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
