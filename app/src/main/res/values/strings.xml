@@ -7,4 +7,17 @@
     <string name="settings_content_description">Settings</string>
     <string name="dark_mode_content_description">Dark mode</string>
     <string name="light_mode_content_description">Light mode</string>
+    <string name="clear_day_content_description">Clear day</string>
+    <string name="cloud_content_description">Cloud</string>
+    <string name="foggy_content_description">Foggy</string>
+    <string name="grain_content_description">Grain</string>
+    <string name="partly_cloudy_day_content_description">Partly cloudy day</string>
+    <string name="rainy_content_description">Rainy</string>
+    <string name="rainy_heavy_content_description">Rainy heavy</string>
+    <string name="rainy_light_content_description">Rainy light</string>
+    <string name="rainy_snow_content_description">Rainy snow</string>
+    <string name="snowing_content_description">Snowing</string>
+    <string name="snowing_heavy_content_description">Snowing heavy</string>
+    <string name="thunderstorm_content_description">Thunderstorm</string>
+    <string name="weather_snowy_content_description">Weather snowy</string>
 </resources>

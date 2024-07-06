@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
@@ -19,8 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabieckacper.weatherwidget.R
 import com.grabieckacper.weatherwidget.viewmodel.WeatherViewModel
@@ -69,17 +73,18 @@ fun WeatherView(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = viewModel.state.value.name)
+            Icon(
+                painter = painterResource(id = viewModel.getWeatherIcon()),
+                contentDescription = stringResource(id = viewModel.getContentDescription()),
+                modifier = Modifier.size(64.dp)
+            )
 
-            Text(text = viewModel.state.value.latitude.toString())
+            Text(
+                text = "${viewModel.state.value.weatherInfo.current.temperature}\u2103",
+                fontSize = 64.sp
+            )
 
-            Text(text = viewModel.state.value.longitude.toString())
-
-            Text(text = viewModel.state.value.isError.toString())
-
-            Text(text = viewModel.state.value.weatherInfo.current.weatherCode.toString())
-
-            Text(text = viewModel.state.value.weatherInfo.current.temperature.toString())
+            Text(text = viewModel.getWeatherDescription())
         }
     }
 }
