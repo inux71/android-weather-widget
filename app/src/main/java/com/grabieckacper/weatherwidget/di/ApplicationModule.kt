@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.grabieckacper.weatherwidget.service.GeocodingService
+import com.grabieckacper.weatherwidget.service.WeatherForecastService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +40,23 @@ object ApplicationModule {
 
     @Provides
     @Singleton
+    @Named("weather-forecast")
+    fun provideWeatherForecastRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://api.open-meteo.com/v1/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideGeocodingService(@Named("geocoding") retrofit: Retrofit): GeocodingService {
         return retrofit.create(GeocodingService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherForecastService(@Named("weather-forecast") retrofit: Retrofit): WeatherForecastService {
+        return retrofit.create(WeatherForecastService::class.java)
     }
 }
